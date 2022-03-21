@@ -1,9 +1,10 @@
 import '@atlaskit/css-reset';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ScoreBoard from './score-board/ScoreBoard';
 
 function App() {
-  return <div>app</div>
+  return <ScoreBoard />
 }
 
 ReactDOM.render(

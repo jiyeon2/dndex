@@ -71,11 +71,20 @@ function ScoreBoard() {
 
   }
 
+  const onClick = () => {
+    const _playerRows = document.querySelectorAll('.player-row');
+    const playerRows = Array.from(_playerRows) as HTMLDivElement[];
+    playerRows.map((row) => {
+      const playerId = row.dataset.playerId;
+      const scoreList = row.querySelector('.score-list');
+      console.log({playerId, scoreList})
+    })
+  }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <h1>friday score board</h1>
-
+      <button onClick={onClick}>calc</button>
 
       {areaOrder.map((areaId, index) => {
         const area = areas[areaId];

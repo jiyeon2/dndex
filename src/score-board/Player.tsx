@@ -24,10 +24,21 @@ const PlayerItem = styled.div<PlayerItemProps>`
   }
 `;
 
-const ScoreItem = styled.input`
+const ScoreInput = styled.input`
   margin-right: 8px;
-  width: 30px;
-  padding: 8px;
+  width: 20px;
+  padding: 4px 8px;
+  // input 화살표 없애기
+  &::-webkit-inner-spin-button, 
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+  &::-webkit-inner-spin-button, 
+  &::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+  
 `;
 
 
@@ -43,12 +54,24 @@ export function Player(props: { player: PlayerData; index: number; }) {
           {...provided.draggableProps}
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
+          className="player-row"
+          data-player-id={player.id}
         >
           <p className="name"
            {...provided.dragHandleProps}
           >{player.name}</p>
           <div className="score-list">
-           {player.scores.map((score,index) => <ScoreItem key={`${player.name}_score_${index}`} defaultValue={score} type="number"/>)}
+           {player.scores.map((score,index) => (
+              <ScoreInput 
+                key={`${player.name}_score_${index}`} 
+                defaultValue={score} 
+                type="number"
+                onInput={(e) => {
+                  const value = e.currentTarget.value;
+                  console.log(e, player.id, index, Number(value) );
+                }}
+              />
+           ))}
           </div>
         </PlayerItem>
       )}
